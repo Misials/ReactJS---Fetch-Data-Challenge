@@ -7,31 +7,13 @@ function App() {
 
 	const [items, setItems] = useState([]);
 
-	const handlePosts = async () => {
-		try {
-			const response = await fetch(`${API_URL}/posts`);
-			if (!response.ok) throw Error(`Did not get correct data!`);
-			const listItem = await response.json();
-			setItems(listItem);
-		} catch (err) {
-			console.log(err.message);
-		}
-	};
+	useEffect(() => {
+		handleFetch();
+	}, []);
 
-	const handleUsers = async () => {
+	const handleFetch = async (data = 'users') => {
 		try {
-			const response = await fetch(`${API_URL}/users`);
-			if (!response.ok) throw Error(`Did not get correct data!`);
-			const listItem = await response.json();
-			setItems(listItem);
-		} catch (err) {
-			console.log(err.message);
-		}
-	};
-
-	const handleComments = async () => {
-		try {
-			const response = await fetch(`${API_URL}/comments`);
+			const response = await fetch(`${API_URL}/${data}`);
 			if (!response.ok) throw Error(`Did not get correct data!`);
 			const listItem = await response.json();
 			setItems(listItem);
@@ -42,7 +24,7 @@ function App() {
 
 	return (
 		<div className='app'>
-			<Header handleUsers={handleUsers} handleComments={handleComments} handlePosts={handlePosts} />
+			<Header handleFetch={handleFetch} />
 			<main>
 				<ItemsList items={items} />
 			</main>

@@ -1,15 +1,15 @@
 import React from 'react';
 
-const Buttons = ({ handleUsers, handlePosts, handleComments }) => {
+const Buttons = ({ handleFetch }) => {
 	return (
 		<div className='buttons'>
-			<button className='btn usersBtn' onClick={handleUsers}>
+			<button className='btn usersBtn' onClick={() => handleFetch()}>
 				Users
 			</button>
-			<button className='btn postsBtn' onClick={handlePosts}>
+			<button className='btn postsBtn' onClick={() => handleFetch('posts')}>
 				Posts
 			</button>
-			<button className='btn commentsBtn' onClick={handleComments}>
+			<button className='btn commentsBtn' onClick={() => handleFetch('comments')}>
 				Comments
 			</button>
 		</div>
